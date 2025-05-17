@@ -2,6 +2,7 @@ import LayoutHeader from './LayoutHeader'
 import LayoutSide from './LayoutSide'
 import LayoutBreadcrumb from './Breadcrumb'
 import { Outlet } from 'react-router-dom'
+import { Suspense } from 'react'
 
 export default function Layout() {
   return (
@@ -12,7 +13,9 @@ export default function Layout() {
         <div className='content'>
           <LayoutBreadcrumb />
           <div className='page'>
-            <Outlet />
+            <Suspense fallback='loading...'>
+              <Outlet />
+            </Suspense>
           </div>
         </div>
       </div>
