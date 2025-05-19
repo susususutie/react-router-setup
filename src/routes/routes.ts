@@ -1,5 +1,5 @@
 import type { IndexRouteObject, NonIndexRouteObject } from 'react-router-dom'
-import type { ElementKey } from './routes/elements'
+import type { ElementKey } from './elements'
 
 type PlainIndexRouterObject = Omit<IndexRouteObject, 'element'> & {
   breadcrumb?: string | undefined
@@ -13,9 +13,13 @@ type PlainNonIndexRouteObject = Omit<NonIndexRouteObject, 'element' | 'children'
 export type PlainRouteObject = PlainIndexRouterObject | PlainNonIndexRouteObject
 
 export const plainRoutes: PlainRouteObject[] = [
+  // 以下页面为单独页面，不包裹 layout，可作为大屏、全屏404页面，需要放在后台页面之前，优先匹配
+  { path: '403', element: 'Page403' },
+  { path: '404', element: 'Page404' },
+  { path: 'screen', element: 'PageScreen' },
   // 后台管理页面，包裹 layout
   {
-    path: '/',
+    path: '',
     element: 'Layout',
     breadcrumb: '后台',
     children: [
@@ -41,10 +45,12 @@ export const plainRoutes: PlainRouteObject[] = [
         breadcrumb: '系统',
         element: 'Outlet',
         children: [
-          { index: true, breadcrumb: '系统列表', element: 'PageSystemIndex' },
-          { path: ':type', breadcrumb: '系统1|2', element: 'PageSystemType' },
+          // 1. index、列表页都指向列表页，可通过两个路径访问
+          { index: true, breadcrumb: '系统列表', element: 'PageSystemList' },
+          { path: 'list', breadcrumb: '系统列表', element: 'PageSystemList' },
           { path: '404', breadcrumb: '相关404', element: 'Page404' },
-          { path: '*', element: 'RedirectScoped404' },
+          { path: ':type', breadcrumb: '系统1|2', element: 'PageSystemType' },
+          { path: '*', element: 'RedirectParent404' },
         ],
       },
       {
@@ -53,10 +59,19 @@ export const plainRoutes: PlainRouteObject[] = [
         element: 'PageConfig',
         children: [{ path: 'modal', breadcrumb: '配置弹窗', element: 'ConfigModal' }],
       },
+      {
+        path: 'chart',
+        breadcrumb: '图表',
+        element: 'Outlet',
+        children: [
+          // 2. index 重定向至列表页
+          { index: true, breadcrumb: '图表列表', element: 'RedirectScopedList' },
+          { path: 'list', breadcrumb: '图表列表', element: 'PageChartList' },
+          { path: 'detail/:id', breadcrumb: '图表详情', element: 'PageChartDetail' },
+        ],
+      },
+      { path: '404', element: 'Page404' },
+      { path: '*', element: 'RedirectRoot404' },
     ],
   },
-  // 以下页面为单独页面，不包裹 layout，可作为大屏、全屏404页面
-  { path: '/403', element: 'Page403' },
-  { path: '/404', element: 'Page404' },
-  { path: '/screen', element: 'PageScreen' },
 ]

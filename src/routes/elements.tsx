@@ -1,37 +1,33 @@
-import Layout from '../layouts'
-// import PageHome from '../pages/home'
-// import PageDashboard from '../pages/dashboard'
-import PageScreen from '../pages/screen'
-// import PageAbout from '../pages/about'
-// import PageAboutAdd from '../pages/about/add'
-// import PageAboutConfig from '../pages/about/config'
-// import PageAboutDetail from '../pages/about/detail'
-// import PageAboutEdit from '../pages/about/edit'
-// import PageSystemIndex from '../pages/system'
-// import PageSystemType from '../pages/system/[type]'
 import { Navigate, Outlet } from 'react-router-dom'
 import FullCenter from '../components/FullCenter'
-import React, { lazy, Suspense, type JSX } from 'react'
-
-const PageHome = lazy(() => import('../pages/home'))
-const PageDashboard = lazy(() => import('../pages/dashboard'))
-const PageAbout = lazy(() => import('../pages/about'))
-const PageAboutAdd = lazy(() => import('../pages/about/add'))
-const PageAboutConfig = lazy(() => import('../pages/about/config'))
-const PageAboutDetail = lazy(() => import('../pages/about/detail'))
-const PageAboutEdit = lazy(() => import('../pages/about/edit'))
-const PageSystemIndex = lazy(() => import('../pages/system'))
-const PageSystemType = lazy(() => import('../pages/system/[type]')) 
-const PageConfig = lazy(() => import('../pages/config'))
-const ConfigModal = lazy(() => import('../pages/config/modal'))
+import Layout from '../layouts'
+import PageAbout from '../pages/about'
+import PageAboutAdd from '../pages/about/add'
+import PageAboutConfig from '../pages/about/config'
+import PageAboutDetail from '../pages/about/detail'
+import PageAboutEdit from '../pages/about/edit'
+import PageChartDetail from '../pages/chart/detail'
+import PageChartList from '../pages/chart/list'
+import PageConfig from '../pages/config'
+import ConfigModal from '../pages/config/modal'
+import PageDashboard from '../pages/dashboard'
+import PageHome from '../pages/home'
+import PageScreen from '../pages/screen'
+import PageSystemList from '../pages/system/list'
+import PageSystemType from '../pages/system/[type]'
 
 export const ElementMap = {
+  Outlet: <Outlet />,
   Layout: <Layout />,
+  Redirect403: <Navigate to='/43' replace />,
   Redirect404: <Navigate to='/404' replace />,
   RedirectScopedIndex: <Navigate to='../' replace />,
-  RedirectScoped404: <Navigate to='../404' replace />,
-  RedirectScopedHome: <Navigate to='../home' replace />,
-  Outlet: <Outlet />,
+  RedirectParent403: <Navigate to='../403' replace />,
+  RedirectParent404: <Navigate to='../404' replace />,
+  RedirectScopedHome: <Navigate to='./home' replace />,
+  RedirectScopedList: <Navigate to='./list' replace />,
+  RedirectRoot403: <Navigate to='/403' replace />,
+  RedirectRoot404: <Navigate to='/404' replace />,
 
   PageHome: <PageHome />,
   PageDashboard: <PageDashboard />,
@@ -40,10 +36,12 @@ export const ElementMap = {
   PageAboutEdit: <PageAboutEdit />,
   PageAboutDetail: <PageAboutDetail />,
   PageAboutConfig: <PageAboutConfig />,
-  PageSystemIndex: <PageSystemIndex />,
-  PageSystemType: <PageSystemType />, 
+  PageSystemList: <PageSystemList />,
+  PageSystemType: <PageSystemType />,
   PageConfig: <PageConfig />,
   ConfigModal: <ConfigModal />,
+  PageChartList: <PageChartList />,
+  PageChartDetail: <PageChartDetail />,
 
   PageScreen: <PageScreen />,
   Page403: <FullCenter>403</FullCenter>,

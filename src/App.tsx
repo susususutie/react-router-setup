@@ -1,4 +1,4 @@
-import { plainRoutes, type PlainRouteObject } from './routes'
+import { plainRoutes, type PlainRouteObject } from './routes/routes'
 import { useRoutes, type RouteObject } from 'react-router-dom'
 import { ElementMap } from './routes/elements'
 
