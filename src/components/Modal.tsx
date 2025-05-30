@@ -41,9 +41,9 @@ export default function Modal(props: ModalProps) {
   }
 
   const modal = (
-    <div style={modalStyle.modalRoot}>
-      {open ? <div style={modalStyle.modalMask}></div> : null}
-      <div style={{ ...modalStyle.modalWrap, display: !open ? 'none' : undefined }} onClick={handleClose}>
+    <div style={modalStyle.root}>
+      {open ? <div style={modalStyle.mask}></div> : null}
+      <div style={{ ...modalStyle.wrap, display: !open ? 'none' : undefined }} onClick={handleClose}>
         <div style={modalStyle.modal}>
           <div style={modalStyle.content}>{children}</div>
         </div>

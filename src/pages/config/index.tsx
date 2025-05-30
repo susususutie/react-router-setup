@@ -15,6 +15,7 @@ export default function PageConfig() {
       <p>
         打开
         <a
+          href='#'
           onClick={e => {
             e.preventDefault()
             setOpen(true)

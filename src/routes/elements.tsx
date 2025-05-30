@@ -22,7 +22,7 @@ const PageConfig = lazy(() => import('../pages/config'))
  * 所有页面都加上 Suspense 的体验不好，点击进行路由跳转时，需要先加载下一页面代码，此时页面没有反应
  * 
  */
-export const ElementMap = {
+export const elementMap = {
   Outlet: <Outlet />,
   Layout: (
     <Suspense fallback={<div>loading...</div>}>
@@ -122,4 +122,5 @@ export const ElementMap = {
   ),
 } as const
 
-export type ElementKey = keyof typeof ElementMap
+export default elementMap
+export type ElementKey = keyof typeof elementMap

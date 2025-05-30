@@ -12,7 +12,7 @@ type PlainNonIndexRouteObject = Omit<NonIndexRouteObject, 'element' | 'children'
 }
 export type PlainRouteObject = PlainIndexRouterObject | PlainNonIndexRouteObject
 
-export const plainRoutes: PlainRouteObject[] = [
+const plainRoutes: PlainRouteObject[] = [
   // 以下页面为单独页面，不包裹 layout，可作为大屏、全屏404页面，需要放在后台页面之前，优先匹配
   { path: '403', element: 'Page403' },
   { path: '404', element: 'Page404' },
@@ -57,7 +57,10 @@ export const plainRoutes: PlainRouteObject[] = [
         path: 'config',
         breadcrumb: '配置',
         element: 'PageConfig',
-        children: [{ path: 'modal', breadcrumb: '配置弹窗', element: 'ConfigModal' }],
+        children: [
+          { path: 'modal', breadcrumb: '配置弹窗', element: 'ConfigModal' },
+          // { path: 'modal', breadcrumb: '配置弹窗', element: 'ConfigModal' },
+        ],
       },
       {
         path: 'chart',
@@ -70,8 +73,9 @@ export const plainRoutes: PlainRouteObject[] = [
           { path: 'detail/:id', breadcrumb: '图表详情', element: 'PageChartDetail' },
         ],
       },
-      { path: '404', element: 'Page404' },
       { path: '*', element: 'RedirectRoot404' },
     ],
   },
 ]
+
+export default plainRoutes
