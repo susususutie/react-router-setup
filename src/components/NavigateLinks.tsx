@@ -37,7 +37,7 @@ export default function NavigateLinks() {
       {pathnames.map(item => (
         <div key={item.title}>
           <h4>{item.title}</h4>
-          <p style={{ display: 'flex', gap: 12 }}>
+          <p style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             {item.items.map(link => (
               <Link key={link} to={link}>
                 {link}

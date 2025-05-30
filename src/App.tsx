@@ -1,6 +1,7 @@
 import { plainRoutes, type PlainRouteObject } from './routes/routes'
 import { useRoutes, type RouteObject } from 'react-router-dom'
 import { ElementMap } from './routes/elements'
+import './app.css'
 
 function getRouteObjects(plainRouteObjects: PlainRouteObject[]): RouteObject[] {
   return plainRouteObjects.map(item => {
