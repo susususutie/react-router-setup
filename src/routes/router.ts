@@ -18,4 +18,4 @@ function getRouteObjects(plainRouteObjects: PlainRouteObject[]): RouteObject[] {
 
 const routeObjects = getRouteObjects(plainRoutes)
 
-export default createBrowserRouter(routeObjects)
+export default createBrowserRouter(routeObjects, { basename: import.meta.env.BASE_URL })

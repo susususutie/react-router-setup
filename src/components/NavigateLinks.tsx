@@ -1,50 +1,41 @@
 import { Link } from 'react-router-dom'
+import { Fragment } from 'react/jsx-runtime'
+import flatPlainRoutes from '../utils/flatPlainRoutes'
+import plainRoutes from '../routes/plain-routes'
+
+const flatRoutes = flatPlainRoutes(plainRoutes, { path: '/' }).map(route => ({
+  ...route,
+  elementPath: route.elementPath?.join('/') || '',
+}))
 
 export default function NavigateLinks() {
-  const pathnames = [
-    {
-      title: '全屏页面',
-      items: ['/403', '/404', '/screen'],
-    },
-    {
-      title: '后台页面',
-      items: ['/', '/home', '/dashboard'],
-    },
-    {
-      title: 'About',
-      items: [
-        '/about',
-        '/about/',
-        '/about/add',
-        '/about/detail/1',
-        '/about/edit/1',
-        '/about/detail/asd',
-        '/about/config',
-        '/about/asd',
-      ],
-    },
-    {
-      title: 'System',
-      items: ['/system', '/system/1', '/system/2', '/system/3'],
-    },
-    {
-      title: 'Config',
-      items: ['/config', '/config/modal'],
-    },
-  ]
+  const breakIndex: number[] = []
+  let lastPath = ''
+  flatRoutes.forEach((route, index) => {
+    if (route.path !== '/' && (!lastPath || !route.path.startsWith(lastPath))) {
+      breakIndex.push(index)
+      lastPath = route.path
+    }
+  })
   return (
-    <div style={{ marginTop: 24, border: '1px solid #b3b3b3', padding: 24 }}>
-      {pathnames.map(item => (
-        <div key={item.title}>
-          <h4>{item.title}</h4>
-          <p style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            {item.items.map(link => (
-              <Link key={link} to={link}>
-                {link}
-              </Link>
-            ))}
-          </p>
-        </div>
+    <div
+      style={{
+        marginTop: 24,
+        border: '1px solid #b3b3b3',
+        padding: 24,
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: 16,
+        fontSize: 16,
+      }}
+    >
+      {flatRoutes.map((route, index) => (
+        <Fragment key={index}>
+          {breakIndex.includes(index) && <div style={{ width: '100%' }} />}
+          <Link to={route.path.replace(/\:([a-zA-Z0-9_]+)/, '1')}>
+            {route.breadcrumb}({route.path})
+          </Link>
+        </Fragment>
       ))}
     </div>
   )

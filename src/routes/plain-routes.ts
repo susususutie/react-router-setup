@@ -1,16 +1,22 @@
 import type { IndexRouteObject, NonIndexRouteObject } from 'react-router-dom'
 import type { ElementKey } from './elements'
 
-type PlainIndexRouterObject = Omit<IndexRouteObject, 'element'> & {
+export type PlainIndexRouterObject = Omit<IndexRouteObject, 'element' | 'path'> & {
   breadcrumb?: string | undefined
   element?: ElementKey | undefined
 }
-type PlainNonIndexRouteObject = Omit<NonIndexRouteObject, 'element' | 'children'> & {
+export type PlainNonIndexRouteObject = Omit<NonIndexRouteObject, 'element' | 'children'> & {
   breadcrumb?: string | undefined
   element?: ElementKey | undefined
   children?: PlainRouteObject[]
 }
 export type PlainRouteObject = PlainIndexRouterObject | PlainNonIndexRouteObject
+export function isPlainIndexRouter(item: PlainRouteObject): item is PlainIndexRouterObject {
+  return 'index' in item && !!item.index
+}
+export function isPlainNonIndexRoute(item: PlainRouteObject): item is PlainNonIndexRouteObject {
+  return !('index' in item) || !item.index
+}
 
 const plainRoutes: PlainRouteObject[] = [
   // 以下页面为单独页面，不包裹 layout，可作为大屏、全屏404页面，需要放在后台页面之前，优先匹配
