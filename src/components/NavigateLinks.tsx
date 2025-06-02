@@ -32,7 +32,7 @@ export default function NavigateLinks() {
       {flatRoutes.map((route, index) => (
         <Fragment key={index}>
           {breakIndex.includes(index) && <div style={{ width: '100%' }} />}
-          <Link to={route.path.replace(/\:([a-zA-Z0-9_]+)/, '1')}>
+          <Link to={route.path.replace(/:([a-zA-Z0-9_]+)/, '1')}>
             {route.breadcrumb}({route.path})
           </Link>
         </Fragment>

@@ -1,4 +1,4 @@
-import plainRoutes, {
+import  {
   isPlainIndexRouter,
   isPlainNonIndexRoute,
   type PlainNonIndexRouteObject,
@@ -15,7 +15,7 @@ export default function flatPlainRoutes(
   }
   const flatRoutes: FlatRouteItem[] = []
 
-  let parentPath = parent?.path || ''
+  const parentPath = parent?.path || ''
   const parentElementPath = parent?.elementPath || []
   for (let index = 0; index < routes.length; index++) {
     const route = routes[index]
